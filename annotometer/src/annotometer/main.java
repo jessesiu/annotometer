@@ -213,7 +213,7 @@ public class main {
 		      JSONArray test = (JSONArray) json.get("rows");
 		      Iterator i = test.iterator();
 		      DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		      Date current = df1.parse("2015-04-01T02:16:18");
+		      Date current = df1.parse("2015-04-01T00:00:00"); //set start time
 		      
 		      while (i.hasNext()) {
 		            JSONObject slide = (JSONObject) i.next();
