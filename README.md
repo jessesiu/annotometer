@@ -19,7 +19,7 @@ www.annotometer.com
   
   5.Command
     
-    java -classpath sqlite-jdbc-3.8.5-pre1.jar:json-simple-1.1.1.jar -jar annotometer.jar  2016-04-09 (Start time parameter)
+    java -classpath sqlite-jdbc-3.8.5-pre1.jar:json-simple-1.1.1.jar -jar annotometer.jar  2016-04-09 <<start time parameter>>
     
   6.Copy the Website code to your server
 
