@@ -13,11 +13,13 @@ www.annotometer.com
     
   4.Download the sqlite-jdbc-3.8.5-pre1.jar and json-simple-1.1.1.jar
   
-  5.Set the competition start time in the programme.
+  5.Get the iCLiKVAL api token in the http://iclikval.riken.jp/, update the token in the geticlicknumber() function,  
+  
+    httpurlconnection1.setRequestProperty("Authorization", "Bearer <<paste the new token>>
   
   5.Command
     
-    java -classpath sqlite-jdbc-3.8.5-pre1.jar:json-simple-1.1.1.jar -jar annotometer.jar 
+    java -classpath sqlite-jdbc-3.8.5-pre1.jar:json-simple-1.1.1.jar -jar annotometer.jar  2016-04-09 (Start time parameter)
     
   6.Copy the Website code to your server
 
