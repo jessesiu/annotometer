@@ -48,10 +48,10 @@ public class main {
 	public static void main( String args[] ) throws IOException, SQLException
 	  {
 	   
-	       updatefile();
+	       updatefile(args);
 	  }
 	
-	public static void updatefile() throws SQLException, IOException {
+	public static void updatefile(String parameters[]) throws SQLException, IOException {
 		
 	     final Runnable beeper = new Runnable() {
 	    	  public void run() { 	 
@@ -69,7 +69,7 @@ public class main {
 		   // readfile(st); //upload noncode data
 		    
 		    try {
-				readannotation();
+				readannotation(parameters);
 			} catch (SQLException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -95,7 +95,7 @@ public class main {
 		
 	}
 
-	public static void readannotation() throws SQLException, IOException{
+	public static void readannotation(String parameters[]) throws SQLException, IOException{
 		
 		String sql="select username,hyponame,iclikname from tbl_user";
 		ResultSet rs = st.executeQuery(sql);
@@ -127,7 +127,7 @@ public class main {
 		if(temp1 !=null && temp1 !="" && !temp1.isEmpty())
 		{
 			System.out.println("here "+ temp1);
-			hyponumber= gethyponumber(temp1);
+			hyponumber= gethyponumber(temp1,parameters[0]);
 	
 		}else
 		{
@@ -137,7 +137,7 @@ public class main {
 		
 		if(temp2 !=null && temp2 !=""&& !temp2.isEmpty())
 		{
-			iclicknumber= geticlicknumber(temp2);
+			iclicknumber= geticlicknumber(temp2,parameters[0]);
 			
 		}
 		else
@@ -164,7 +164,7 @@ public class main {
 		
 	}
 	
-	public static int gethyponumber(String hyponame){
+	public static int gethyponumber(String hyponame,String datetime){
 		
 		int hyponumber=0;
 		
@@ -213,7 +213,8 @@ public class main {
 		      JSONArray test = (JSONArray) json.get("rows");
 		      Iterator i = test.iterator();
 		      DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		      Date current = df1.parse("2015-04-01T00:00:00"); //set start time
+		      datetime=datetime+"T00:00:00";
+		      Date current = df1.parse(datetime);
 		      
 		      while (i.hasNext()) {
 		            JSONObject slide = (JSONObject) i.next();
@@ -253,7 +254,7 @@ public class main {
 	    return sb.toString();
 	}
 	
-	public static int geticlicknumber(String iclick){
+	public static int geticlicknumber(String iclick, String datetime){
 		
 		int iclicknumber=0;
 		
@@ -263,10 +264,10 @@ public class main {
 		
 		try
 		    {
-		      
-			  url1 = new URL("http://api.iclikval.riken.jp/user-annotation-count?user="+iclick+"&since=2015%2F04%2F01");
+		      datetime=datetime.replace("-", "/");
+		      url1 = new URL("http://api.iclikval.riken.jp/user-annotation-count?user="+iclick+"&since="+datetime);
 			//  url1 = new URL(http://api.iclikval.riken.jp/user-annotation-count?since=2014/10/25&until=2016/1/1&user=tdtaylor&profile=true;
-			  System.out.println(url1);
+		      System.out.println(url1);
 
 		      httpurlconnection1 = (HttpURLConnection) url1.openConnection();
 		      httpurlconnection1.setDoOutput(true);
